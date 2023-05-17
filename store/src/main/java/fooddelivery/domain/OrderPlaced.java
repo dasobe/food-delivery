@@ -1,8 +1,6 @@
 package fooddelivery.domain;
 
-import fooddelivery.domain.*;
 import fooddelivery.infra.AbstractEvent;
-import java.util.*;
 import lombok.*;
 
 @Data
@@ -18,4 +16,5 @@ public class OrderPlaced extends AbstractEvent {
     private Integer qty;
     private String status;
     private String foodName;
+    
 }

@@ -1,9 +1,6 @@
 package fooddelivery.domain;
 
 import fooddelivery.OrderApplication;
-import fooddelivery.domain.OrderPlaced;
-import java.util.Date;
-import java.util.List;
 import javax.persistence.*;
 import lombok.Data;
 

@@ -32,8 +32,8 @@ public class Delivery {
 
     @PostPersist
     public void onPostPersist() {
-        DeliveryListAdded deliveryListAdded = new DeliveryListAdded(this);
-        deliveryListAdded.publishAfterCommit();
+        // DeliveryListAdded deliveryListAdded = new DeliveryListAdded(this);
+        // deliveryListAdded.publishAfterCommit();
     }
 
     public static DeliveryRepository repository() {
@@ -56,13 +56,20 @@ public class Delivery {
     }
 
     public static void addDeliveryList(CookFinished cookFinished) {
-        /** Example 1:  new item 
+        // /** Example 1:  new item 
         Delivery delivery = new Delivery();
+        delivery.setFoodId(cookFinished.getFoodId());
+        delivery.setOrderId(cookFinished.getOrderId());
+        delivery.setStatus("DeliveryStarted");
+        delivery.setStoreId(cookFinished.getStoreId());
+        delivery.setUserAddress(cookFinished.getUserAddress());
+        delivery.setUserId(cookFinished.getUserId());
+        delivery.setUserName(cookFinished.getUserId());
         repository().save(delivery);
 
         DeliveryListAdded deliveryListAdded = new DeliveryListAdded(delivery);
         deliveryListAdded.publishAfterCommit();
-        */
+
 
         /** Example 2:  finding and process
         

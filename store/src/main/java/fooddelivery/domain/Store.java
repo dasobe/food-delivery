@@ -1,9 +1,6 @@
 package fooddelivery.domain;
 
 import fooddelivery.StoreApplication;
-import fooddelivery.domain.OrderCanceled;
-import java.util.Date;
-import java.util.List;
 import javax.persistence.*;
 import lombok.Data;
 
@@ -37,8 +34,8 @@ public class Store {
 
     @PostUpdate
     public void onPostUpdate() {
-        OrderCanceled orderCanceled = new OrderCanceled(this);
-        orderCanceled.publishAfterCommit();
+        // OrderCanceled orderCanceled = new OrderCanceled(this);
+        // orderCanceled.publishAfterCommit();
     }
 
     public static StoreRepository repository() {
@@ -69,46 +66,31 @@ public class Store {
     }
 
     public static void receiveOrder(OrderPlaced orderPlaced) {
-        /** Example 1:  new item 
         Store store = new Store();
-        repository().save(store);
-
-        */
-
-        /** Example 2:  finding and process
+        store.setFoodId(orderPlaced.getFoodId());
+        store.setFoodName(orderPlaced.getFoodName());
+        store.setOrderId(orderPlaced.getId());
+        store.setQty(orderPlaced.getQty());
+        store.setStatus(orderPlaced.getStatus());
+        store.setUserAddress(orderPlaced.getUserAddress());
+        store.setUserId(orderPlaced.getUserId());
         
-        repository().findById(orderPlaced.get???()).ifPresent(store->{
-            
-            store // do something
-            repository().save(store);
-
-
-         });
-        */
+        repository().save(store);
 
     }
 
     public static void orderCancel(OrderCanceled orderCanceled) {
-        /** Example 1:  new item 
-        Store store = new Store();
-        repository().save(store);
 
-        OrderCanceled orderCanceled = new OrderCanceled(store);
-        orderCanceled.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
         
-        repository().findById(orderCanceled.get???()).ifPresent(store->{
+        repository().findByOrderId(orderCanceled.getId()).ifPresent(store->{
             
-            store // do something
+            store.setStatus("OrderCanceled.");
             repository().save(store);
 
-            OrderCanceled orderCanceled = new OrderCanceled(store);
-            orderCanceled.publishAfterCommit();
+            OrderCanceled orderCanceled2 = new OrderCanceled(store);
+            orderCanceled2.publishAfterCommit();
 
          });
-        */
 
     }
 }
