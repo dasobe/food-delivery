@@ -17,6 +17,8 @@ public class OrderCanceled extends AbstractEvent {
     private String userAddress;
     private Long storeId;
     private Integer qty;
+    private String status;
+    private String foodName;
 
     public OrderCanceled(Order aggregate) {
         super(aggregate);
