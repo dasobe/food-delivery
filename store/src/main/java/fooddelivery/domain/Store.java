@@ -87,4 +87,28 @@ public class Store {
         */
 
     }
+
+    public static void orderCancel(OrderCanceled orderCanceled) {
+        /** Example 1:  new item 
+        Store store = new Store();
+        repository().save(store);
+
+        OrderCanceled orderCanceled = new OrderCanceled(store);
+        orderCanceled.publishAfterCommit();
+        */
+
+        /** Example 2:  finding and process
+        
+        repository().findById(orderCanceled.get???()).ifPresent(store->{
+            
+            store // do something
+            repository().save(store);
+
+            OrderCanceled orderCanceled = new OrderCanceled(store);
+            orderCanceled.publishAfterCommit();
+
+         });
+        */
+
+    }
 }
