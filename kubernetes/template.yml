@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: order
-          image: username/order:latest
+          image: dasobe05/order:20230518
           ports:
             - containerPort: 8080
           readinessProbe:
@@ -58,7 +58,7 @@ spec:
     spec:
       containers:
         - name: store
-          image: username/store:latest
+          image: dasobe05/store:20230518
           ports:
             - containerPort: 8080
           readinessProbe:
@@ -98,7 +98,7 @@ spec:
     spec:
       containers:
         - name: rider
-          image: username/rider:latest
+          image: dasobe05/rider:20230518
           ports:
             - containerPort: 8080
           readinessProbe:
@@ -120,43 +120,43 @@ spec:
 
 ---
 
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: cs
-  labels:
-    app: cs
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: cs
-  template:
-    metadata:
-      labels:
-        app: cs
-    spec:
-      containers:
-        - name: cs
-          image: username/cs:latest
-          ports:
-            - containerPort: 8080
-          readinessProbe:
-            httpGet:
-              path: '/actuator/health'
-              port: 8080
-            initialDelaySeconds: 10
-            timeoutSeconds: 2
-            periodSeconds: 5
-            failureThreshold: 10
-          livenessProbe:
-            httpGet:
-              path: '/actuator/health'
-              port: 8080
-            initialDelaySeconds: 120
-            timeoutSeconds: 2
-            periodSeconds: 5
-            failureThreshold: 5
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: cs
+#   labels:
+#     app: cs
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: cs
+#   template:
+#     metadata:
+#       labels:
+#         app: cs
+#     spec:
+#       containers:
+#         - name: cs
+#           image: dasobe05/cs:latest
+#           ports:
+#             - containerPort: 8080
+#           readinessProbe:
+#             httpGet:
+#               path: '/actuator/health'
+#               port: 8080
+#             initialDelaySeconds: 10
+#             timeoutSeconds: 2
+#             periodSeconds: 5
+#             failureThreshold: 10
+#           livenessProbe:
+#             httpGet:
+#               path: '/actuator/health'
+#               port: 8080
+#             initialDelaySeconds: 120
+#             timeoutSeconds: 2
+#             periodSeconds: 5
+#             failureThreshold: 5
 
 
 ---
@@ -213,16 +213,16 @@ spec:
 ---
 
 
-apiVersion: v1
-kind: Service
-metadata:
-  name: cs
-  labels:
-    app: cs
-spec:
-  ports:
-    - port: 8080
-      targetPort: 8080
-  selector:
-    app: cs
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: cs
+#   labels:
+#     app: cs
+# spec:
+#   ports:
+#     - port: 8080
+#       targetPort: 8080
+#   selector:
+#     app: cs
 

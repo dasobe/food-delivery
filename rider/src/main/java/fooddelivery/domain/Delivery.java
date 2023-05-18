@@ -44,7 +44,7 @@ public class Delivery {
     }
 
     public void pick(PickCommand pickCommand) {
-        this.setStatus("DeliveryStarted");
+        this.setStatus(pickCommand.getStatus());
         DeliveryStarted deliveryStarted = new DeliveryStarted(this);
         deliveryStarted.publishAfterCommit();
     }
@@ -52,7 +52,7 @@ public class Delivery {
     public void deliveryComplete(
         DeliveryCompleteCommand deliveryCompleteCommand
     ) {
-        this.setStatus("DeliveryCompleted");
+        this.setStatus(deliveryCompleteCommand.getStatus());
         DeliveryCompleted deliveryCompleted = new DeliveryCompleted(this);
         deliveryCompleted.publishAfterCommit();
     }
@@ -63,7 +63,7 @@ public class Delivery {
         delivery.setFoodId(cookFinished.getFoodId());
         delivery.setOrderId(cookFinished.getOrderId());
         delivery.setStatus("DeliveryStarted");
-        delivery.setStoreId(cookFinished.getStoreId());
+        delivery.setStoreId(cookFinished.getId());
         delivery.setUserAddress(cookFinished.getUserAddress());
         delivery.setUserId(cookFinished.getUserId());
         delivery.setUserName(cookFinished.getUserId());
@@ -79,6 +79,7 @@ public class Delivery {
             
             delivery // do something
             repository().save(delivery);
+
 
             DeliveryListAdded deliveryListAdded = new DeliveryListAdded(delivery);
             deliveryListAdded.publishAfterCommit();

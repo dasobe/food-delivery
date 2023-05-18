@@ -31,8 +31,8 @@ public class Order {
 
     @PostPersist
     public void onPostPersist() {
-        // OrderPlaced orderPlaced = new OrderPlaced(this);
-        // orderPlaced.publishAfterCommit();
+        OrderPlaced orderPlaced = new OrderPlaced(this);
+        orderPlaced.publishAfterCommit();
     }
 
     public static OrderRepository repository() {
@@ -43,7 +43,7 @@ public class Order {
     }
 
     public void cancel(CancelCommand cancelCommand) {
-        this.setStatus("OrderCanceled");
+        this.setStatus(cancelCommand.getStatus());
         OrderCanceled orderCanceled = new OrderCanceled(this);
         orderCanceled.publishAfterCommit();
     }
