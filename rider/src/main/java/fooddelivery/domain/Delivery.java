@@ -44,6 +44,7 @@ public class Delivery {
     }
 
     public void pick(PickCommand pickCommand) {
+        this.setStatus("DeliveryStarted");
         DeliveryStarted deliveryStarted = new DeliveryStarted(this);
         deliveryStarted.publishAfterCommit();
     }
@@ -51,6 +52,7 @@ public class Delivery {
     public void deliveryComplete(
         DeliveryCompleteCommand deliveryCompleteCommand
     ) {
+        this.setStatus("DeliveryCompleted");
         DeliveryCompleted deliveryCompleted = new DeliveryCompleted(this);
         deliveryCompleted.publishAfterCommit();
     }

@@ -46,21 +46,25 @@ public class Store {
     }
 
     public void acceptOrder(AcceptOrderCommand acceptOrderCommand) {
+        this.setStatus("OrderAccepted");
         OrderAccepted orderAccepted = new OrderAccepted(this);
         orderAccepted.publishAfterCommit();
     }
 
     public void rejectOrder(RejectOrderCommand rejectOrderCommand) {
+        this.setStatus("OrderRejected");
         OrderCanceled orderCanceled = new OrderCanceled(this);
         orderCanceled.publishAfterCommit();
     }
 
     public void startCook(StartCookCommand startCookCommand) {
+        this.setStatus("CookingStarted");
         CookStarted cookStarted = new CookStarted(this);
         cookStarted.publishAfterCommit();
     }
 
     public void finishCook(FinishCookCommand finishCookCommand) {
+        this.setStatus("CookingFinished");
         CookFinished cookFinished = new CookFinished(this);
         cookFinished.publishAfterCommit();
     }

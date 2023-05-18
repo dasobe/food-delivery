@@ -68,5 +68,3 @@ spring:
         event-out:
           destination: fooddelivery
           contentType: application/json
-
-
