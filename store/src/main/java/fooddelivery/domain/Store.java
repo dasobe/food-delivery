@@ -1,6 +1,9 @@
 package fooddelivery.domain;
 
 import fooddelivery.StoreApplication;
+import fooddelivery.domain.StoreOrderCanceled;
+import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 import lombok.Data;
 
@@ -34,8 +37,8 @@ public class Store {
 
     @PostUpdate
     public void onPostUpdate() {
-        // OrderCanceled orderCanceled = new OrderCanceled(this);
-        // orderCanceled.publishAfterCommit();
+        StoreOrderCanceled storeOrderCanceled = new StoreOrderCanceled(this);
+        storeOrderCanceled.publishAfterCommit();
     }
 
     public static StoreRepository repository() {
@@ -85,16 +88,26 @@ public class Store {
 
     public static void orderCancel(OrderCanceled orderCanceled) {
 
+        /** Example 1:  new item 
+        Store store = new Store();
+        repository().save(store);
+
+        StoreOrderCanceled storeOrderCanceled = new StoreOrderCanceled(store);
+        storeOrderCanceled.publishAfterCommit();
+        */
+
         
-        repository().findByOrderId(orderCanceled.getId()).ifPresent(store->{
+        repository().findByOrderId(orderCanceled.getOrderId()).ifPresent(store->{
             
-            store.setStatus("OrderCanceled.");
+            store.setStatus("StoreOrderCanceled");
             repository().save(store);
 
-            OrderCanceled orderCanceled2 = new OrderCanceled(store);
-            orderCanceled2.publishAfterCommit();
+            StoreOrderCanceled storeOrderCanceled = new StoreOrderCanceled(store);
+            storeOrderCanceled.publishAfterCommit();
 
          });
+
+
 
     }
 }
