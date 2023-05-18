@@ -1,7 +1,7 @@
 package fooddelivery.domain;
 
 import fooddelivery.StoreApplication;
-import fooddelivery.domain.OrderCanceled;
+import fooddelivery.domain.StoreOrderCanceled;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
@@ -37,8 +37,8 @@ public class Store {
 
     @PostUpdate
     public void onPostUpdate() {
-        OrderCanceled orderCanceled = new OrderCanceled(this);
-        orderCanceled.publishAfterCommit();
+        StoreOrderCanceled storeOrderCanceled = new StoreOrderCanceled(this);
+        storeOrderCanceled.publishAfterCommit();
     }
 
     public static StoreRepository repository() {
@@ -93,8 +93,8 @@ public class Store {
         Store store = new Store();
         repository().save(store);
 
-        OrderCanceled orderCanceled = new OrderCanceled(store);
-        orderCanceled.publishAfterCommit();
+        StoreOrderCanceled storeOrderCanceled = new StoreOrderCanceled(store);
+        storeOrderCanceled.publishAfterCommit();
         */
 
         /** Example 2:  finding and process
@@ -104,8 +104,8 @@ public class Store {
             store // do something
             repository().save(store);
 
-            OrderCanceled orderCanceled = new OrderCanceled(store);
-            orderCanceled.publishAfterCommit();
+            StoreOrderCanceled storeOrderCanceled = new StoreOrderCanceled(store);
+            storeOrderCanceled.publishAfterCommit();
 
          });
         */
